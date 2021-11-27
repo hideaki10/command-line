@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+//directory
 type RepoManager struct {
 	repos        []string
 	ingoreErrors bool
@@ -23,7 +24,7 @@ func NewRepoMangager(baseDir string, repoNames []string, ingoreErrors bool) (rep
 		return
 	}
 
-	if baseDir[len(baseDir-1)] != '/' {
+	if baseDir[len(baseDir)-1] != '/' {
 		baseDir += "/"
 	}
 
