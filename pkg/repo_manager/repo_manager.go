@@ -15,7 +15,7 @@ type RepoManager struct {
 }
 
 //
-func NewRepoMangager(baseDir string, repoNames []string, ingoreErrors bool) (repoManager *RepoManager, err error) {
+func NewRepoManager(baseDir string, repoNames []string, ingoreErrors bool) (repoManager *RepoManager, err error) {
 	_, err = os.Stat(baseDir)
 	if err != nil {
 		if os.IsNotExist(err) {

@@ -1,4 +1,4 @@
-package helper
+package helpers
 
 import (
 	"io/ioutil"
@@ -9,11 +9,11 @@ import (
 
 func CreateDir(baseDir string, name string, initGit bool) (err error) {
 	dirName := path.Join(baseDir, name)
-
 	err = os.MkdirAll(dirName, os.ModePerm)
 	if err != nil {
 		return
 	}
+
 	if !initGit {
 		return
 	}
@@ -22,7 +22,6 @@ func CreateDir(baseDir string, name string, initGit bool) (err error) {
 	if err != nil {
 		return
 	}
-
 	defer os.Chdir(currDir)
 	os.Chdir(dirName)
 	err = exec.Command("git", "init").Run()
