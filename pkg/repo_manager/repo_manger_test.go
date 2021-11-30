@@ -1,7 +1,6 @@
 package repo_manager
 
 import (
-	"fmt"
 	"os"
 	"path"
 	"strings"
@@ -188,7 +187,6 @@ var _ = Describe("Repo manager tests", func() {
 		Ω(err).Should(BeNil())
 
 		output, err = rm.Exec("log --oneline")
-		fmt.Println(output)
 		Ω(err).Should(BeNil())
 
 		ok := strings.HasSuffix(output[dir], "added some files...\n")
