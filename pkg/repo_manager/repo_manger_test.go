@@ -151,19 +151,19 @@ var _ = Describe("Repo manager tests", func() {
 		Ω(repos[1] == path.Join(baseDir, repoList[1])).Should(BeTrue())
 	})
 
-	It("Should create branches successfully", func() {
-		repoList = append(repoList, "dir-2")
-		CreateDir(baseDir, repoList[1], true)
-		rm, err := NewRepoManager(baseDir, repoList, true)
-		Ω(err).Should(BeNil())
+	// It("Should create branches successfully", func() {
+	// 	repoList = append(repoList, "dir-2")
+	// 	CreateDir(baseDir, repoList[1], true)
+	// 	rm, err := NewRepoManager(baseDir, repoList, true)
+	// 	Ω(err).Should(BeNil())
 
-		output, err := rm.Exec("checkout -b test-branch")
-		Ω(err).Should(BeNil())
+	// 	output, err := rm.Exec("checkout -b test-branch")
+	// 	Ω(err).Should(BeNil())
 
-		for _, out := range output {
-			Ω(out).Should(Equal("Switched to a new branch 'test-branch'\n"))
-		}
-	})
+	// 	for _, out := range output {
+	// 		Ω(out).Should(Equal("Switched to a new branch 'test-branch'\n"))
+	// 	}
+	// })
 
 	It("Should commit files successfully", func() {
 		rm, err := NewRepoManager(baseDir, repoList, true)
