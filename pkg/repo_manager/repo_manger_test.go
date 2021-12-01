@@ -150,7 +150,7 @@ var _ = Describe("Repo manager tests", func() {
 		Ω(repos[1] == path.Join(baseDir, repoList[1])).Should(BeTrue())
 	})
 
-	It("Should create branches successfully", func() {
+	FIt("Should create branches successfully", func() {
 		repoList = append(repoList, "dir-2")
 		CreateDir(baseDir, repoList[1], true)
 		rm, err := NewRepoManager(baseDir, repoList, true)
@@ -164,7 +164,7 @@ var _ = Describe("Repo manager tests", func() {
 		}
 	})
 
-	It("Should commit files successfully", func() {
+	FIt("Should commit files successfully", func() {
 		rm, err := NewRepoManager(baseDir, repoList, true)
 		Ω(err).Should(BeNil())
 
