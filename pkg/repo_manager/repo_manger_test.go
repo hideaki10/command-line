@@ -185,7 +185,7 @@ var _ = Describe("Repo manager tests", func() {
 		err = os.Chdir(dir)
 		Ω(err).Should(BeNil())
 
-		_, err = rm.Exec("log --oneline")
+		_, err = rm.Exec("log")
 		Ω(err).Should(BeNil())
 
 		// ok := strings.HasSuffix(output[dir], "added some files...\n")
