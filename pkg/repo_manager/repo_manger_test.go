@@ -31,7 +31,7 @@ var _ = Describe("Repo manager tests", func() {
 		Ω(err).Should(BeNil())
 		repoList = []string{"dir-1"}
 	})
-	AfterEach(removeAll)
+	//AfterEach(removeAll)
 
 	It("Should fail with invalid base dir", func() {
 		_, err := NewRepoManager("/no-such-dir", repoList, true)
