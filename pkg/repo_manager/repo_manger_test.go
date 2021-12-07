@@ -1,6 +1,7 @@
 package repo_manager
 
 import (
+	"fmt"
 	"os"
 	"path"
 	"strings"
@@ -104,6 +105,7 @@ var _ = Describe("Repo manager tests", func() {
 		}
 
 		err = AddFiles(baseDir, repoList[0], true, "file_1.txt", "file_2.txt")
+		fmt.Println(err)
 		Ω(err).Should(BeNil())
 
 		// Restore working directory after executing the command
