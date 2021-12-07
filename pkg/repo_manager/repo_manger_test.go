@@ -1,7 +1,6 @@
 package repo_manager
 
 import (
-	"fmt"
 	"os"
 	"path"
 	"strings"
@@ -117,7 +116,6 @@ var _ = Describe("Repo manager tests", func() {
 		Ω(err).Should(BeNil())
 
 		output, err = rm.Exec("log --oneline")
-		fmt.Println("the error message is  ", err.Error())
 
 		Ω(err).Should(BeNil())
 
