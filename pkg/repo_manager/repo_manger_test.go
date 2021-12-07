@@ -105,7 +105,7 @@ var _ = Describe("Repo manager tests", func() {
 		}
 
 		err = AddFiles(baseDir, repoList[0], true, "file_1.txt", "file_2.txt")
-		fmt.Println(err)
+
 		Ω(err).Should(BeNil())
 
 		// Restore working directory after executing the command
@@ -117,6 +117,7 @@ var _ = Describe("Repo manager tests", func() {
 		Ω(err).Should(BeNil())
 
 		output, err = rm.Exec("log --oneline")
+		fmt.Println(err)
 		Ω(err).Should(BeNil())
 
 		ok := strings.HasSuffix(output[dir], "added some files...\n")
