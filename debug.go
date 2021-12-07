@@ -23,6 +23,8 @@ func main() {
 
 	AddFiles(baseDir, repoList[0], true, "file_1.txt", "file_2.txt")
 
+	AddFiles(baseDir, repoList[1], true, "file_1.txt", "file_2.txt")
+
 	output, err := rm.Exec("log --oneline")
 	if err != nil {
 		fmt.Print(err)
