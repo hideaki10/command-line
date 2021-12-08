@@ -11,9 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-const baseDir = "/tmp/test-multi-git"
+const baseDir = "/Users/senshikou/Desktop/Development/gomodgithub/commandline/gitrepos"
 
-var repoList = []string{}
+var repoList = []string{
+	"repo1",
+	"repo2",
+}
 
 var _ = Describe("Repo manager tests", func() {
 	var err error
