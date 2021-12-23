@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "../../../../Downloads/githubCode/multi-git-0.4/e2e_tests"
 		}
 	],
 	"settings": {}
