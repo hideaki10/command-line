@@ -9,6 +9,7 @@ import (
 
 	"github.com/hideaki10/command-line/pkg/repo_manager"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var ignoreErrors bool
@@ -51,7 +52,15 @@ var rootCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.Flags().BoolVar(&ignoreErrors, "ignore-errors", false, `will continue executing the command for all repositories if ignore-errors is true otherwise it will stop execution when an error occurs`)
+	//rootCmd.Flags().BoolVar(&ignoreErrors, "ignore-errors", false, `will continue executing the command for all repositories if ignore-errors is true otherwise it will stop execution when an error occurs`)
+	rootCmd.Flags().Bool(
+		"ignore-errors",
+		false,
+		`will continue executing the command for all repos if ignore-errors is true otherwise it will stop execution when an error occurs`)
+	err := viper.BindPFlag("ignore-errors", rootCmd.Flags().Lookup("ignore-errors"))
+	if err != nil {
+		panic("Unable to bind flag")
+	}
 }
 
 func Execute() {
