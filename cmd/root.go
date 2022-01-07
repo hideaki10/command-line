@@ -8,11 +8,19 @@ import (
 	"strings"
 
 	"github.com/hideaki10/command-line/pkg/repo_manager"
+	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
 
-var ignoreErrors bool
+//var ignoreErrors bool
+var configFilename string
+
+func check(err error) {
+	if err != nil {
+		log.Fatal(err)
+	}
+}
 
 var rootCmd = &cobra.Command{
 	Use:   "mg",
@@ -31,7 +39,7 @@ var rootCmd = &cobra.Command{
 			repoNames = strings.Split(os.Getenv("MG_REPOS"), ",")
 		}
 
-		repoManager, err := repo_manager.NewRepoManager(root, repoNames, ignoreErrors)
+		repoManager, err := repo_manager.NewRepoManager(root, repoNames, viper.GetBool("ignore-errors"))
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -52,12 +60,18 @@ var rootCmd = &cobra.Command{
 }
 
 func init() {
-	//rootCmd.Flags().BoolVar(&ignoreErrors, "ignore-errors", false, `will continue executing the command for all repositories if ignore-errors is true otherwise it will stop execution when an error occurs`)
+	cobra.OnInitialize(initConfig)
+	home, err := homedir.Dir()
+	check(err)
+
+	defaultConfigFilename := path.Join(home, ".config/multi-git.toml")
+	rootCmd.Flags().StringVar(&configFilename, "config", defaultConfigFilename, "config file path (default is $HOME/multi-git.toml)")
+
 	rootCmd.Flags().Bool(
 		"ignore-errors",
 		false,
 		`will continue executing the command for all repos if ignore-errors is true otherwise it will stop execution when an error occurs`)
-	err := viper.BindPFlag("ignore-errors", rootCmd.Flags().Lookup("ignore-errors"))
+	err = viper.BindPFlag("ignore-errors", rootCmd.Flags().Lookup("ignore-errors"))
 	if err != nil {
 		panic("Unable to bind flag")
 	}
@@ -69,4 +83,23 @@ func Execute() {
 		fmt.Print(err)
 		os.Exit(1)
 	}
+}
+
+func initConfig() {
+	_, err := os.Stat(configFilename)
+	if os.IsNotExist(err) {
+		check(err)
+	}
+
+	viper.SetConfigFile(configFilename)
+	err = viper.ReadInConfig()
+	check(err)
+
+	viper.SetEnvPrefix("MG")
+	err = viper.BindEnv("root")
+	check(err)
+
+	err = viper.BindEnv("repos")
+	check(err)
+
 }
