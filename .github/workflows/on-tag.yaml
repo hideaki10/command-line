@@ -2,7 +2,7 @@ name: create release
 on:
   push:
     tags:
-      - "0*"
+      - "v*"
 
 jobs:
   build:
