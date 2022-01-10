@@ -10,7 +10,8 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    name: Build binaries
+    runs-on: ubuntu-latest
     steps:
       - name: Set up Go 1.x
         uses: actions/setup-go@v2
